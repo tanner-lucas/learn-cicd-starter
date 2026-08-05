@@ -9,6 +9,8 @@ import (
 	"github.com/google/uuid"
 )
 
+// adding a comment so a job will run
+
 func (cfg *apiConfig) handlerNotesGet(w http.ResponseWriter, r *http.Request, user database.User) {
 	posts, err := cfg.DB.GetNotesForUser(r.Context(), user.ID)
 	if err != nil {
