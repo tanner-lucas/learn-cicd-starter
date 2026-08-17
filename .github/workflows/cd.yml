@@ -21,3 +21,17 @@ jobs:
             - name: Build and deploy
               run: |
                 scripts/buildprod.sh # Build the production binary
+
+            - name: 'Google Cloud Auth'
+              uses: 'google-github-actions/auth@v2'
+              with:
+                credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+            - name: 'Set up Google Cloud SDK'
+              uses: 'google-github-actions/setup-gcloud@v3'
+
+            - name: 'Use gcloud CLI'
+              run: 'gcloud info'
+            
+            - name: 'Build and Deploy to Artifact Registry'
+              run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-504703/notely-ar-repo/notely:v1 .
